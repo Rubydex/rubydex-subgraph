@@ -33,19 +33,19 @@ pipeline {
               sshPublisherDesc(
                 configName: "${dist_host}",
                 transfers: [
-                  sshTransfer(
+                  /*sshTransfer(
                     execCommand: "mkdir -p /data/rubydex/tpc/${py_instance} && cd /data/rubydex/tpc/tpc-scripts && ./python-control.sh stop ${py_instance}"
-                  ),
+                  ),*/
                   sshTransfer(
                     sourceFiles: "${env.BUILD_TAG}/${env.BUILD_TAG}.tar.gz",
                     remoteDirectory: "tpc/${py_instance}",
                     cleanRemote: false, //never set to true
                     execTimeout: 120000,
                     execCommand: "cd /data/rubydex/tpc/${py_instance} && tar xvf ${env.BUILD_TAG}/${env.BUILD_TAG}.tar.gz -C ./ && rm -rf ${env.BUILD_TAG}"
-                  ),
+                  )/*,
                   sshTransfer(
                     execCommand: "cd /data/rubydex/tpc/tpc-scripts && ./python-control.sh start ${py_instance}"
-                  )
+                  )*/
                 ],
               verbose: true
             )
