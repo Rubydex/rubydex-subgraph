@@ -21,7 +21,6 @@ from web3._utils.request import make_post_request
 from web3._utils.encoding import FriendlyJsonSerde
 from eth_utils import to_bytes, to_text
 
-
 logger = get_logger(__name__)
 
 web3_errors = tuple([error for name, error in inspect.getmembers(exceptions) if
@@ -212,7 +211,6 @@ class _Chain:
         transaction = web3.eth.get_transaction(tx_hash)
         return transaction
 
-    
     @error_retrying
     def get_blocks(self, numbers, threads=10):
         """
@@ -287,14 +285,12 @@ class _Chain:
         self.AliveRpcs = copy.deepcopy(self.AllRpcs)
         self.refresh_rpc(geth_poa=geth_poa, local_filter=local_filter, min_block_number=min_block_number, times=times)
 
-
     def get_batch_events(self, address, topic, from_block, to_block='latest'):
         web3 = self.get_web3()
-        if to_block=="latest":
+        if to_block == "latest":
             to_block = self.get_block_number()
-        
 
-        logger.info(f"get_batch_events(): from block { from_block } => { to_block }")
+        logger.info(f"get_batch_events(): from block {from_block} => {to_block}")
         queries = []
         queries.append({
             "jsonrpc": "2.0",
@@ -306,10 +302,10 @@ class _Chain:
                     "address": address,
                     "topics": topic,
                 }
-                ],
+            ],
             "id": 0,
         })
-               
+
         uri = web3.manager.provider.endpoint_uri
         encoded = FriendlyJsonSerde().json_encode(queries)
         raw_response = make_post_request(uri, to_bytes(text=encoded))
@@ -319,7 +315,6 @@ class _Chain:
             raise Exception(response[0]['error'].get('message'))
         return response[0]['result']
 
-        
 
 @single_chain
 class Chain(_Chain):

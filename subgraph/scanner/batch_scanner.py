@@ -13,23 +13,24 @@ from libs.utils import hex_to_address, get_object, keccak
 from libs.chain import NetWork, Chain
 from libs.db_mysql import db_session, check_databases, check_table_exist
 
-
 logger = get_logger(__name__)
 
+
 def check_update_table():
-    create_sql =  """
+    create_sql = """
         CREATE TABLE updated_blocknumber
         (
             id                  int primary key,
             contract_address    VARCHAR(42) NOT NULL UNIQUE,
             block_number        INT(20) NOT NULL
-            
+
         );
     """
     with db_session() as db:
         check_databases(db, set(["chain"]))
         if not check_table_exist(db, "chain", "updated_blocknumber"):
             db.execute(create_sql)
+
 
 def get_last_block_number(contract_address):
     sql = f"""
@@ -43,6 +44,7 @@ def get_last_block_number(contract_address):
         else:
             return START_BLOCK_NUMBER
 
+
 def update_last_block_number(contract_address, last_block_number):
     sql = f"""
         INSERT INTO updated_blocknumber (contract_address, block_number)
@@ -51,11 +53,10 @@ def update_last_block_number(contract_address, last_block_number):
     """
     with db_session() as db:
         db.execute(sql)
-        
+
 
 class BATCH_SCANNER:
 
-    
     def __init__(self, chain):
         logger.info("work start")
         self.w3 = Chain(chain)
@@ -63,14 +64,13 @@ class BATCH_SCANNER:
         self.update_address = VAULT['AddressOfUpdate']
 
         check_update_table()
-        
 
     async def run(self):
         logger.info("start listen events")
         start_block_number = min(
             get_last_block_number(hex_to_address(self.vault_address)),
             get_last_block_number(hex_to_address(self.update_address))
-            )
+        )
         addresses = [hex_to_address(self.vault_address), hex_to_address(self.update_address)]
         topics = []
         cur_block_number = self.w3.get_block_number()
@@ -88,8 +88,6 @@ class BATCH_SCANNER:
 
             update_last_block_number(hex_to_address(self.vault_address), to_block)
             update_last_block_number(hex_to_address(self.update_address), to_block)
-
-
 
     def process_event(self, result):
         # logger.info(f"message {result}")
@@ -111,19 +109,14 @@ class BATCH_SCANNER:
                     event[f'topic{i}'] = result['topics'][i]
             return event
 
-    
-    
-
     async def handle_message(self, message):
         event = self.process_event(message)
         if event:
             contract_address = event['contract_address']
             event_topic = event['topic0']
             logger.info(f"{contract_address} {event_topic}")
-    
+
             raw_event_handler(event, self)
-
-
 
     def start(self):
         asyncio.run(self.run())

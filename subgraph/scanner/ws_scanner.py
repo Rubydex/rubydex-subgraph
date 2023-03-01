@@ -13,7 +13,6 @@ from libs.utils import hex_to_address, get_object, keccak
 from libs.chain import NetWork, Chain
 from libs.redis import get_redis_async_connection
 
-
 logger = get_logger(__name__)
 
 
@@ -39,7 +38,6 @@ class WS_SCANNER:
         self._reconnects = 0
 
         self._connect_redis()
-        
 
     async def _connect(self):
         try:
@@ -91,27 +89,27 @@ class WS_SCANNER:
         logger.info("start listen events")
         while True:
             # try:
-                if self.ws_state == WSListenerState.RECONNECTING:
-                    await self._reconnect()
-                if not self.ws_conn or self.ws_state != WSListenerState.STREAMING:
-                    await self._connect()
-                elif self.ws_conn.state == websockets.protocol.State.CLOSING:  # type: ignore
-                    await asyncio.sleep(0.1)
-                    continue
-                elif self.ws_conn.state == websockets.protocol.State.CLOSED:  # type: ignore
-                    await self._reconnect()
-                if self.ws_state == WSListenerState.STREAMING:
-                    async for message in self.ws_conn:
-                        logger.info(f"message {message}")
-                        await self.handle_message(message)
+            if self.ws_state == WSListenerState.RECONNECTING:
+                await self._reconnect()
+            if not self.ws_conn or self.ws_state != WSListenerState.STREAMING:
+                await self._connect()
+            elif self.ws_conn.state == websockets.protocol.State.CLOSING:  # type: ignore
+                await asyncio.sleep(0.1)
+                continue
+            elif self.ws_conn.state == websockets.protocol.State.CLOSED:  # type: ignore
+                await self._reconnect()
+            if self.ws_state == WSListenerState.STREAMING:
+                async for message in self.ws_conn:
+                    logger.info(f"message {message}")
+                    await self.handle_message(message)
 
-            # except ConnectionClosedError as e:
-            #     logger.error(f"connection close error ({e})")
+        # except ConnectionClosedError as e:
+        #     logger.error(f"connection close error ({e})")
 
-            # except Exception as e:
-            #     logger.error(f"Unknown exception ({e})")
-            #     continue
-    
+        # except Exception as e:
+        #     logger.error(f"Unknown exception ({e})")
+        #     continue
+
     def _connect_redis(self):
         self.redis_client = get_redis_async_connection()
 
@@ -137,8 +135,6 @@ class WS_SCANNER:
                     event[f'topic{i}'] = result['topics'][i]
             return event
 
-
-
     async def publish_to_redis(self, event):
         channel_name = f"{self.chain_id}_{event['contract_address']}"
         await self.redis_client.publish(channel_name, json.dumps(event))
@@ -151,13 +147,8 @@ class WS_SCANNER:
             event_topic = event['topic0']
             logger.info(f"{contract_address} {event_topic}")
             await self.publish_to_redis(event)
-            
+
             raw_event_handler(event, self)
-
-            
-
-    
-
 
     def start(self):
         asyncio.run(self.run())

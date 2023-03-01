@@ -29,12 +29,10 @@ class RawEventRepo(BaseRepository):
         );
     """
 
-
     def check_table(self):
         tables = {self.__table_name: self.__create_sql}
         check_tables(self.session, self.__database_name, tables)
 
-            
     def create(self, **kwargs):
         sql = f"""
             insert into {self.__table_name}
@@ -51,8 +49,6 @@ class RawEventRepo(BaseRepository):
             );
             """
         self.session.execute(sql)
-                
-
 
     def update(self):
         pass
@@ -66,7 +62,6 @@ class RawEventRepo(BaseRepository):
         else:
             logger.info(f"{self.name}.create_if_exist(): tx_hash {tx_hash} exist")
 
-
     def find_all(self):
         sql = f"""
                select * from {self.__table_name};
@@ -74,7 +69,6 @@ class RawEventRepo(BaseRepository):
         self.session.execute(sql)
         res = self.session.get_dicts()
         return res
-        
 
     def find_by_tx_hash_log_index(self, tx_hash, log_index):
         sql = f"""
