@@ -17,6 +17,10 @@ from web3.middleware import geth_poa_middleware, local_filter_middleware
 from config import RPCS, ABIS_PATH, NETWORK2ID
 from libs.logger import get_logger
 from libs.utils import retry_with_web3
+from web3._utils.request import make_post_request
+from web3._utils.encoding import FriendlyJsonSerde
+from eth_utils import to_bytes, to_text
+
 
 logger = get_logger(__name__)
 
@@ -284,7 +288,7 @@ class _Chain:
         self.refresh_rpc(geth_poa=geth_poa, local_filter=local_filter, min_block_number=min_block_number, times=times)
 
 
-    def get_batch_events(address, topic, from_block, to_block='latest'):
+    def get_batch_events(self, address, topic, from_block, to_block='latest'):
         web3 = self.get_web3()
         if to_block=="latest":
             to_block = self.get_block_number()
@@ -300,7 +304,7 @@ class _Chain:
                     "fromBlock": Web3.toHex(from_block),
                     "toBlock": Web3.toHex(to_block),
                     "address": address,
-                    "topics": topics,
+                    "topics": topic,
                 }
                 ],
             "id": 0,

@@ -1,5 +1,6 @@
 from web3 import Web3
 from libs.logger import get_logger
+from libs.db_mysql import check_tables
 from libs.db_mysql import db_session as Session
 from .base_repo import BaseRepository
 
@@ -7,10 +8,10 @@ logger = get_logger(__name__)
 
 
 class RawEventRepo(BaseRepository):
-    __database_name = "dc"
-    __table_name = "raw_event"
-    __create_sql =  """
-        CREATE TABLE raw_event
+    __database_name = "chain"
+    __table_name = "event"
+    __create_sql = f"""
+        CREATE TABLE {__table_name}
         (
             id                  int primary key auto_increment comment '自增主键',
             block_hash          VARCHAR(66) NOT NULL,
@@ -24,21 +25,15 @@ class RawEventRepo(BaseRepository):
             topic1              VARCHAR(66),
             topic2              VARCHAR(66),
             topic3              VARCHAR(66),
-            data                VARCHAR(512)
+            data                VARCHAR(770)
         );
     """
-    # def __init__(self, session: Session):
-    #     super().__init__(session)
+
 
     def check_table(self):
-        self.session.execute(f'use {self.__database_name};')
-        self.session.execute('show tables;')
-        exist_tables = set(row[0] for row in self.session.get_tuple())
-        if self.__table_name not in exist_tables:
-            self.session.execute(self.__create_sql)
-            logger.info(f"create table - {self.__table_name}")
-        else:
-            logger.info(f"table - {self.__table_name} existed")
+        tables = {self.__table_name: self.__create_sql}
+        check_tables(self.session, self.__database_name, tables)
+
             
     def create(self, **kwargs):
         sql = f"""

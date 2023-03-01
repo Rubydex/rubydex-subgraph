@@ -10,7 +10,7 @@ MYSQL_INFORMATION = {
 }
 
 CHAIN_ID = 42161
-
+START_BLOCK_NUMBER = 53852263
 
 VAULT = {
     'Chain': 'arbitrum',

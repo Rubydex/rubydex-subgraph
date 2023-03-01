@@ -9,6 +9,7 @@ from config import EVENT_CONFIG
 from subgraph.models import *
 
 logger = get_logger(__name__)
+EVENT_TABLE = "event"
 
 @strawberry.input
 class Page():
@@ -81,7 +82,7 @@ class Query:
         clause = filter_process(event_sig, where, page, sort_by)
         with db_session() as session:
             sql = f"""
-                select * from raw_event {clause};
+                select * from {EVENT_TABLE} {clause};
             """
             logger.info(sql)
             session.execute(sql)
@@ -95,12 +96,12 @@ class Query:
 
     @strawberry.field
     @timing
-    def withdraw_event(self, where: TransactionFilter = {}, page: Page = {}, sort_by: SortBy = {}) -> List[WithdrawEventEntity]:
+    def withd{EVENT_TABLE}(self, where: TransactionFilter = {}, page: Page = {}, sort_by: SortBy = {}) -> List[WithdrawEventEntity]:
         event_sig = keccak("Withdraw(address,address,uint256,uint256,uint256)")
         clause = filter_process(event_sig, where, page, sort_by)
         with db_session() as session:
             sql = f"""
-                select * from raw_event {clause};
+                select * from {EVENT_TABLE} {clause};
             """
             logger.info(sql)            
             session.execute(sql)
@@ -113,12 +114,12 @@ class Query:
 
     @strawberry.field
     @timing
-    def create_request_withdraw_event(self, where: TransactionFilter = {}, page: Page = {}, sort_by: SortBy = {}) -> List[CreateRequestWithdrawEntity]:
+    def create_request_withd{EVENT_TABLE}(self, where: TransactionFilter = {}, page: Page = {}, sort_by: SortBy = {}) -> List[CreateRequestWithdrawEntity]:
         event_sig = keccak("CreateRequestWithdraw(uint256,address,address,bytes)")
         clause = filter_process(event_sig, where, page, sort_by)
         with db_session() as session:
             sql = f"""
-                select * from raw_event {clause};
+                select * from {EVENT_TABLE} {clause};
             """
             logger.info(sql)            
             session.execute(sql)
@@ -131,12 +132,12 @@ class Query:
 
     @strawberry.field
     @timing
-    def execute_withdraw_event(self, where: TransactionFilter = {}, page: Page = {}, sort_by: SortBy = {}) -> List[ExecuteWithdrawEntity]:
+    def execute_withd{EVENT_TABLE}(self, where: TransactionFilter = {}, page: Page = {}, sort_by: SortBy = {}) -> List[ExecuteWithdrawEntity]:
         event_sig = keccak("ExecuteWithdraw(uint256,address,address,bytes)")
         clause = filter_process(event_sig, where, page, sort_by)
         with db_session() as session:
             sql = f"""
-                select * from raw_event {clause};
+                select * from {EVENT_TABLE} {clause};
             """
             logger.info(sql)            
             session.execute(sql)
@@ -149,12 +150,12 @@ class Query:
 
     @strawberry.field
     @timing
-    def cancel_withdraw_event(self, where: TransactionFilter = {}, page: Page = {}, sort_by: SortBy = {}) -> List[CancelWithdrawEntity]:
+    def cancel_withd{EVENT_TABLE}(self, where: TransactionFilter = {}, page: Page = {}, sort_by: SortBy = {}) -> List[CancelWithdrawEntity]:
         event_sig = keccak("CancelWithdraw(uint256,address,address,bytes)")
         clause = filter_process(event_sig, where, page, sort_by)
         with db_session() as session:
             sql = f"""
-                select * from raw_event {clause};
+                select * from {EVENT_TABLE} {clause};
             """
             logger.info(sql)            
             session.execute(sql)
@@ -172,7 +173,7 @@ class Query:
         clause = filter_process(event_sig, where, page, sort_by)
         with db_session() as session:
             sql = f"""
-                select * from raw_event {clause};
+                select * from {EVENT_TABLE} {clause};
             """
             logger.info(sql)            
             session.execute(sql)
@@ -190,7 +191,7 @@ class Query:
         clause = filter_process(event_sig, where, page, sort_by)
         with db_session() as session:
             sql = f"""
-                select * from raw_event {clause};
+                select * from {EVENT_TABLE} {clause};
             """
             logger.info(sql)            
             session.execute(sql)

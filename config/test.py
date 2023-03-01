@@ -2,11 +2,12 @@ MYSQL_INFORMATION = {
     'host': 'localhost',
     'user': 'dc',
     'password': '5hb94Pj1*g1v',
-    'database': 'dc',
+    'database': 'chain',
     'charset': 'utf8'
 }
 
 CHAIN_ID = 421613
+START_BLOCK_NUMBER = 4378689
 
 VAULT = {
     'Chain': 'arbitrumtestnet',

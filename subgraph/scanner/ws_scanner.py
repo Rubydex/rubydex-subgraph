@@ -38,7 +38,6 @@ class WS_SCANNER:
         self.MAX_RECONNECTS = 10
         self._reconnects = 0
 
-        self.add_handler_from_config()
         self._connect_redis()
         
 
@@ -138,15 +137,6 @@ class WS_SCANNER:
                     event[f'topic{i}'] = result['topics'][i]
             return event
 
-    
-    def add_handler_from_config(self):
-        self.handler_registry = {}
-        # for event in EVENT_CONFIG:
-        #     event_topic = keccak(event['event_name'])
-        #     handler_obj = get_object(all_handlers, event['handler_name'])
-        #     self.handler_registry[hex_to_address(event['address'])] = {event_topic:handler_obj}
-        
-        # logger.info(f"handler_registry init: {self.handler_registry}")
 
 
     async def publish_to_redis(self, event):
@@ -161,14 +151,7 @@ class WS_SCANNER:
             event_topic = event['topic0']
             logger.info(f"{contract_address} {event_topic}")
             await self.publish_to_redis(event)
-            # if self.handler_registry.get(contract_address):
-            #     handler = self.handler_registry[contract_address].get(event_topic)
-            #     if handler:
-            #         handler(event, self)
-                    
-            #         logger.info(f"redis dump {json.dumps(event)}")
-
-            ## raw handler
+            
             raw_event_handler(event, self)
 
             
