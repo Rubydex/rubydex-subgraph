@@ -1,7 +1,15 @@
+# MYSQL_INFORMATION = {
+#     'host': 'localhost',
+#     'user': 'dc',
+#     'password': '5hb94Pj1*g1v',
+#     'database': 'chain',
+#     'charset': 'utf8'
+# }
+
 MYSQL_INFORMATION = {
-    'host': 'localhost',
+    'host': '172.31.19.155',
     'user': 'dc',
-    'password': '5hb94Pj1*g1v',
+    'password': 'AkjklAu@Kn1',
     'database': 'chain',
     'charset': 'utf8'
 }
