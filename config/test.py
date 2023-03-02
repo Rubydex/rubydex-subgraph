@@ -8,10 +8,19 @@
 
 MYSQL_INFORMATION = {
     'host': '172.31.19.155',
-    'user': 'dc',
-    'password': 'AkjklAu@Kn1',
+    'user': 'chain',
+    'password': 'J+6Yfwr@9aj',
     'database': 'chain',
     'charset': 'utf8'
+}
+
+
+REDIS_CONFIG = {
+    "host": "172.31.18.170",
+    "port": 6379,
+    "password": "J+6Yfwr@9aj",
+    "db": 0,
+    "decode_responses": True
 }
 
 CHAIN_ID = 421613

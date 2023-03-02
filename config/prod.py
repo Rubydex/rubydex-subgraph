@@ -3,10 +3,19 @@ from .path import *
 
 MYSQL_INFORMATION = {
     'host': 'prod-rubydex-cluster.cluster-cerd2x53mzqf.ap-southeast-1.rds.amazonaws.com',
-    'user': 'dc',
-    'password': 'e1c3d578280db36d6acf698359dc5ea8',
+    'user': 'chain',
+    'password': 'Rt7@yzv0Ola59Izbv',
     'database': 'chain',
     'charset': 'utf8'
+}
+
+
+REDIS_CONFIG = {
+    "host": "redis.host",
+    "port": 6379,
+    "password": "J+6Yfwr@9aj",
+    "db": 0,
+    "decode_responses": True
 }
 
 CHAIN_ID = 42161
