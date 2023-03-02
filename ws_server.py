@@ -135,6 +135,6 @@ async def catch_all(event, sid, data):
 
 if __name__ == "__main__":
     # web.run_app(init_app(), port=9002)
-    kwargs = { "host": "0.0.0.0", "port": 9002}
+    kwargs = { "host": "0.0.0.0", "port": 6014}
     uvicorn.run("ws_server:app", **kwargs)
 

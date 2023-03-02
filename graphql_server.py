@@ -47,6 +47,5 @@ app.add_route('/graphql', graphql_app)
 
 
 if __name__ == "__main__":
-    # web.run_app(init_app(), port=9002)
-    kwargs = { "host": "0.0.0.0", "port": 9000}
+    kwargs = { "host": "0.0.0.0", "port": 6013}
     uvicorn.run("event_api:app", **kwargs)

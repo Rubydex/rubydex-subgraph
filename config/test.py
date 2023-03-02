@@ -1,33 +1,33 @@
-MYSQL_INFORMATION = {
-    'host': 'localhost',
-    'user': 'dc',
-    'password': '5hb94Pj1*g1v',
-    'database': 'chain',
-    'charset': 'utf8'
-}
-
 # MYSQL_INFORMATION = {
-#     'host': '172.31.19.155',
-#     'user': 'chain',
-#     'password': 'J+6Yfwr@9aj',
+#     'host': 'localhost',
+#     'user': 'dc',
+#     'password': '5hb94Pj1*g1v',
 #     'database': 'chain',
 #     'charset': 'utf8'
 # }
 
-REDIS_CONFIG = {
-    "host": "127.0.0.1",
-    "port": 6379,
-    "db": 0,
-    "decode_responses": True
+MYSQL_INFORMATION = {
+    'host': '172.31.19.155',
+    'user': 'chain',
+    'password': 'J+6Yfwr@9aj',
+    'database': 'chain',
+    'charset': 'utf8'
 }
 
 # REDIS_CONFIG = {
-#     "host": "172.31.18.170",
+#     "host": "127.0.0.1",
 #     "port": 6379,
-#     "password": "J+6Yfwr@9aj",
 #     "db": 0,
 #     "decode_responses": True
 # }
+
+REDIS_CONFIG = {
+    "host": "172.31.18.170",
+    "port": 6379,
+    "password": "J+6Yfwr@9aj",
+    "db": 0,
+    "decode_responses": True
+}
 
 CHAIN_ID = 421613
 START_BLOCK_NUMBER = 4378689
