@@ -10,10 +10,6 @@ from subgraph.models import *
 
 logger = get_logger(__name__)
 EVENT_TABLE = "event"
-<<<<<<< HEAD
-
-=======
->>>>>>> 603b6dedeee5b7713db680da1b4e905e375b3daa
 
 @strawberry.input
 class Page():
@@ -105,131 +101,6 @@ class Query:
 
     @strawberry.field
     @timing
-<<<<<<< HEAD
-    def withd{EVENT_TABLE}(self, where: TransactionFilter = {}, page
-
-    : Page = {}, sort_by: SortBy = {}) -> List[WithdrawEventEntity]:
-    event_sig = keccak("Withdraw(address,address,uint256,uint256,uint256)")
-    clause = filter_process(event_sig, where, page, sort_by)
-    with db_session() as session:
-        sql = f"""
-                select * from {EVENT_TABLE} {clause};
-            """
-        logger.info(sql)
-        session.execute(sql)
-        res = session.get_dicts()
-        logger.info(res)
-        if res:
-            return [WithdrawEvent(event).to_entity() for event in res]
-        else:
-            return [WithdrawEventEntity]
-
-
-@strawberry.field
-@timing
-def create_request_withd{EVENT_TABLE}(self, where: TransactionFilter = {}, page
-
-: Page = {}, sort_by: SortBy = {}) -> List[CreateRequestWithdrawEntity]:
-event_sig = keccak("CreateRequestWithdraw(uint256,address,address,bytes)")
-clause = filter_process(event_sig, where, page, sort_by)
-with db_session() as session:
-    sql = f"""
-                select * from {EVENT_TABLE} {clause};
-            """
-    logger.info(sql)
-    session.execute(sql)
-    res = session.get_dicts()
-    logger.info(res)
-    if res:
-        return [CreateRequestWithdrawEvent(event).to_entity() for event in res]
-    else:
-        return [CreateRequestWithdrawEntity()]
-
-
-@strawberry.field
-@timing
-def execute_withd{EVENT_TABLE}(self, where: TransactionFilter = {}, page
-
-: Page = {}, sort_by: SortBy = {}) -> List[ExecuteWithdrawEntity]:
-event_sig = keccak("ExecuteWithdraw(uint256,address,address,bytes)")
-clause = filter_process(event_sig, where, page, sort_by)
-with db_session() as session:
-    sql = f"""
-                select * from {EVENT_TABLE} {clause};
-            """
-    logger.info(sql)
-    session.execute(sql)
-    res = session.get_dicts()
-    logger.info(res)
-    if res:
-        return [ExecuteWithdrawEvent(event).to_entity() for event in res]
-    else:
-        return [ExecuteWithdrawEntity()]
-
-
-@strawberry.field
-@timing
-def cancel_withd{EVENT_TABLE}(self, where: TransactionFilter = {}, page
-
-: Page = {}, sort_by: SortBy = {}) -> List[CancelWithdrawEntity]:
-event_sig = keccak("CancelWithdraw(uint256,address,address,bytes)")
-clause = filter_process(event_sig, where, page, sort_by)
-with db_session() as session:
-    sql = f"""
-                select * from {EVENT_TABLE} {clause};
-            """
-    logger.info(sql)
-    session.execute(sql)
-    res = session.get_dicts()
-    logger.info(res)
-    if res:
-        return [CancelWithdrawEvent(event).to_entity() for event in res]
-    else:
-        return [CancelWithdrawEntity()]
-
-
-@strawberry.field
-@timing
-def log_balance_change_event(self, where: TransactionFilter = {}, page: Page = {}, sort_by: SortBy = {}) -> List[
-    LogBalanceChangeEntity]:
-    event_sig = keccak("LogBalanceChange(address,address,int256)")
-    clause = filter_process(event_sig, where, page, sort_by)
-    with db_session() as session:
-        sql = f"""
-                select * from {EVENT_TABLE} {clause};
-            """
-        logger.info(sql)
-        session.execute(sql)
-        res = session.get_dicts()
-        logger.info(res)
-        if res:
-            return [LogBalanceChangeEvent(event).to_entity() for event in res]
-        else:
-            return [LogBalanceChangeEntity()]
-
-
-@strawberry.field
-@timing
-def log_position_change_event(self, where: TransactionFilter = {}, page: Page = {}, sort_by: SortBy = {}) -> List[
-    LogPositionChangeEntity]:
-    event_sig = keccak("LogPositionChange(address,bytes32,int64,int64,int128)")
-    clause = filter_process(event_sig, where, page, sort_by)
-    with db_session() as session:
-        sql = f"""
-                select * from {EVENT_TABLE} {clause};
-            """
-        logger.info(sql)
-        session.execute(sql)
-        res = session.get_dicts()
-        logger.info(res)
-        if res:
-            return [LogPositionChangeEvent(event).to_entity() for event in res]
-        else:
-            return [LogPositionChangeEntity()]
-
-
-schema = strawberry.Schema(query=Query)
-=======
     def withdraw_event(self, where: TransactionFilter = {}, page: Page = {}, sort_by: SortBy = {}) -> List[
         WithdrawEventEntity]:
         event_sig = keccak("Withdraw(address,address,uint256,uint256,uint256)")
@@ -344,4 +215,3 @@ schema = strawberry.Schema(query=Query)
 
 
 schema = strawberry.Schema(query=Query)
->>>>>>> 603b6dedeee5b7713db680da1b4e905e375b3daa

@@ -9,8 +9,6 @@ MYSQL_INFORMATION = {
     'charset': 'utf8'
 }
 
-<<<<<<< HEAD
-=======
 
 REDIS_CONFIG = {
     "host": "redis.host",
@@ -20,7 +18,6 @@ REDIS_CONFIG = {
     "decode_responses": True
 }
 
->>>>>>> 603b6dedeee5b7713db680da1b4e905e375b3daa
 CHAIN_ID = 42161
 START_BLOCK_NUMBER = 53852263
 
