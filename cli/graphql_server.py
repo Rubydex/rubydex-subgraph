@@ -1,5 +1,5 @@
 from time import time
-from config import GRAPHQL_PROT
+from config import GRAPHQL_PORT
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from strawberry.asgi import GraphQL
@@ -45,5 +45,5 @@ app.add_route('/graphql', graphql_app)
 
 
 if __name__ == "__main__":
-    kwargs = { "host": "0.0.0.0", "port": GRAPHQL_PROT}
+    kwargs = { "host": "0.0.0.0", "port": GRAPHQL_PORT}
     uvicorn.run("event_api:app", **kwargs)
