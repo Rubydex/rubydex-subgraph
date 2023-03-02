@@ -13,14 +13,6 @@ sys.path.insert(0, "/home/evan/code/rubydex_subgraph")
 
 
 
-REDIS_CONFIG = {
-    "host": "127.0.0.1",
-    "port": 6379,
-    "db": 0,
-    "decode_responses": True
-}
-
-
 SERVICE_NAME = 'Executor'
 if 'global' in sys.argv[0].lower():
     SERVICE_NAME = 'Global_Executor'
