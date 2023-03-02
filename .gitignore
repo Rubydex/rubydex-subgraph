@@ -1,0 +1,7 @@
+*.ipynb
+.ipynb_checkpoints
+.idea/
+__pycache__/
+Logs
+archive
+.pk
