@@ -14,6 +14,12 @@ MYSQL_INFORMATION = {
     'charset': 'utf8'
 }
 
+REDIS_CONFIG = {
+    "host": "127.0.0.1",
+    "port": 6379,
+    "db": 0,
+    "decode_responses": True
+}
 
 REDIS_CONFIG = {
     "host": "172.31.18.170",
