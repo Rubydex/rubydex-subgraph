@@ -1,25 +1,22 @@
 from time import time
-from typing import Union
+from config import GRAPHQL_PORT
 from fastapi import FastAPI, Request
-from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
-# from fastapi.middleware.gzip import GZipMiddleware
 from strawberry.asgi import GraphQL
 import uvicorn
-
-from scanner.resolver import schema
-
-
-
-graphql_app = GraphQL(schema)
-
-app = FastAPI()
-
+import strawberry
+from subgraph.resolver import Query
 
 origins = [
         'http://localhost:3000',
         '*',
         ]
+
+schema = strawberry.Schema(query=Query)
+
+graphql_app = GraphQL(schema)
+
+app = FastAPI()
 
 app.add_middleware(
         CORSMiddleware,
@@ -43,11 +40,10 @@ def read_root():
     return {"Hello": "World!"}
 
 app.add_route('/graphql', graphql_app)
-
+# app.mount('/static', StaticFiles(directory='static'), name='static')
 # app.add_websocket_route('/graphql', graphql_app)
 
 
 if __name__ == "__main__":
-    # web.run_app(init_app(), port=9002)
-    kwargs = { "host": "0.0.0.0", "port": 9000}
-    uvicorn.run("event_api:app", **kwargs)
+    kwargs = { "host": "0.0.0.0", "port": GRAPHQL_PORT}
+    uvicorn.run("graphql_server:app", **kwargs)

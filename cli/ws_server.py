@@ -5,7 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 import async_timeout
 import socketio
 import uvicorn
-from config import EVENT_CONFIG, CHAIN_ID
+from config import EVENT_CONFIG, CHAIN_ID, SOCKET_PORT
 from libs.logger import get_logger
 from libs.redis import get_redis_async_connection
 
@@ -135,6 +135,6 @@ async def catch_all(event, sid, data):
 
 if __name__ == "__main__":
     # web.run_app(init_app(), port=9002)
-    kwargs = { "host": "0.0.0.0", "port": 9002}
+    kwargs = { "host": "0.0.0.0", "port": SOCKET_PORT}
     uvicorn.run("ws_server:app", **kwargs)
 

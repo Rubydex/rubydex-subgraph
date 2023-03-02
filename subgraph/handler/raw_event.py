@@ -6,7 +6,5 @@ logger = get_logger(__name__)
 
 def raw_event_handler(event, context):
     with db_session() as session:
-        deposit_event_repo = RawEventRepo(session)
-        deposit_event_repo.create_if_not_exist(**event)
-
-        
+        raw_event_repo = RawEventRepo(session)
+        raw_event_repo.create_if_not_exist(**event)
