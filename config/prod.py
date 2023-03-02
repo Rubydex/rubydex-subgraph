@@ -18,8 +18,12 @@ REDIS_CONFIG = {
     "decode_responses": True
 }
 
+CHAIN = "arbitrum"
 CHAIN_ID = 42161
 START_BLOCK_NUMBER = 53852263
+
+GRAPHQL_PORT = 6013
+SOCKET_PORT = 6014
 
 VAULT = {
     'Chain': 'arbitrum',

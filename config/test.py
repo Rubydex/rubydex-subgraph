@@ -29,8 +29,12 @@ REDIS_CONFIG = {
     "decode_responses": True
 }
 
+CHAIN = "arbitrumtestnet"
 CHAIN_ID = 421613
 START_BLOCK_NUMBER = 4378689
+
+GRAPHQL_PORT = 6013
+SOCKET_PORT = 6014
 
 VAULT = {
     'Chain': 'arbitrumtestnet',

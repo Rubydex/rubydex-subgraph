@@ -1,7 +1,7 @@
 from config import CHAIN
-from subgraph.scanner import BATCH_SCANNER
+from subgraph.scanner import WS_SCANNER
 from libs.logger import get_logger
 logger = get_logger(__name__)
 logger.info("work start")
 
-BATCH_SCANNER(CHAIN).start()
+WS_SCANNER(CHAIN).start()
