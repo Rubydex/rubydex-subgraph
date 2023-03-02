@@ -20,10 +20,9 @@ def check_update_table():
     create_sql = """
         CREATE TABLE updated_blocknumber
         (
-            id                  int primary key,
+            id                  int primary key auto_increment,
             contract_address    VARCHAR(42) NOT NULL UNIQUE,
             block_number        INT(20) NOT NULL
-
         );
     """
     with db_session() as db:
