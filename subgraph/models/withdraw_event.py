@@ -3,6 +3,8 @@ from libs.logger import get_logger
 from dataclasses import dataclass, field
 from typing import List
 from eth_abi import decode
+from web3 import Web3
+from libs.utils import hex_to_address
 import strawberry
 
 
