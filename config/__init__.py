@@ -6,7 +6,9 @@ from .path import *
 from .test import *
 
 
-SERVICE_NAME = sys.argv[0].split("/")[-1].lower()
+PROCESS_NAME = sys.argv[0].split("/")[-1]
+SERVICE_NAME = PROCESS_NAME.split(".")[0].lower()
+
 
 if len(sys.argv) > 1:
     arg = sys.argv[1].lower()
