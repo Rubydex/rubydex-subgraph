@@ -4,7 +4,7 @@ pipeline {
   //change variables value below
   environment {
     py_instance="subgraph"
-    dist_host="prod-java-chain01"
+    dist_host="dev-java-gateway01"
     }
   stages {
     stage('Init') {
