@@ -61,6 +61,4 @@ if __name__ == "__main__":
         print(f"-- {channel_name}: {json.dumps(data, indent=2)} ({now - last_time:>6.2f}s)")
         last_time = now
 
-
-
     asyncio.run(main(sio, url))

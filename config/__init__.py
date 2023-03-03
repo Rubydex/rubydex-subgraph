@@ -5,18 +5,8 @@ from .chains import *
 from .path import *
 from .test import *
 
-MODE = "test"
-DEBUG = False
-USDT_ADDRESS = "0x05111E862280c8b135bCB5Ee173c557f3e1BBcD8"
 
-sys.path.insert(0, "/home/evan/code/rubydex_subgraph")
-
-
-
-SERVICE_NAME = 'Executor'
-if 'global' in sys.argv[0].lower():
-    SERVICE_NAME = 'Global_Executor'
-
+SERVICE_NAME = sys.argv[0].split("/")[-1].lower()
 
 if len(sys.argv) > 1:
     arg = sys.argv[1].lower()
